@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public float fMoveSpeed = 5f;
+    public float moveSpeed = 5f;
+
+    private void Update()
+    {
+        TriggerFire();
+    }
 
     void FixedUpdate()
     {
         Move();
-
     }
 
     // Player 이동 함수
@@ -24,6 +28,26 @@ public class PlayerControl : MonoBehaviour
         dir.Normalize();
 
         // 이동
-        transform.Translate(dir * fMoveSpeed * Time.deltaTime);
+        transform.Translate(dir * moveSpeed * Time.deltaTime);
+    }
+
+    // 직접 무기를 발사하는 함수
+    void TriggerFire()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            // 무기가 마우스를 바라봄
+            WeaponDir[] weaponDir = GetComponentsInChildren<WeaponDir>();
+            for (int i = 0; i < weaponDir.Length; i++)
+            {
+                weaponDir[i].LookCursor();
+            }
+            // 총알이 발사됨
+            WeaponFire[] weaponFire = GetComponentsInChildren<WeaponFire>();
+            for (int i = 0; i < weaponFire.Length; i++)
+            {
+                weaponFire[i].Fire();
+            }
+        }
     }
 }

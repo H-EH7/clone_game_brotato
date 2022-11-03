@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public GameObject Enemy;
+    [SerializeField]
+    GameObject Enemy;
 
     float currentTime;
 
-    // Update is called once per frame
     void Update()
+    {
+        GenerateEnemy();
+    }
+
+    // Enemy 오브젝트를 랜덤한 위치에서 생성하는 함수
+    void GenerateEnemy()
     {
         currentTime += Time.deltaTime;
 

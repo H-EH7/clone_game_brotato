@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour
 {
-    public float fMoveSpeed = 3f;
+    public float moveSpeed = 3f;
 
     GameObject Target;
 
@@ -27,6 +27,6 @@ public class EnemyControl : MonoBehaviour
         dir.Normalize();
 
         // ¿Ãµø
-        transform.Translate(dir * fMoveSpeed * Time.deltaTime);
+        transform.Translate(dir * moveSpeed * Time.deltaTime);
     }
 }
