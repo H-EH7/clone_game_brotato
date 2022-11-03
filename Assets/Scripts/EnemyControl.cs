@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class EnemyControl : MonoBehaviour
 
     private void Start()
     {
-        // Player¸¦ Å¸°ÙÀ¸·Î ¼³Á¤
+        // Playerë¥¼ íƒ€ê²Ÿìœ¼ë¡œ ì„¤ì •
         Target = GameObject.Find("Player");
     }
 
@@ -19,14 +19,14 @@ public class EnemyControl : MonoBehaviour
         Move();
     }
 
-    // Enemy ÀÌµ¿ ÇÔ¼ö
+    // Enemy ì´ë™ í•¨ìˆ˜
     void Move()
     {
-        // ÀÌµ¿ ¹æÇâ ¼³Á¤
+        // ì´ë™ ë°©í–¥ ì„¤ì •
         Vector2 dir = Target.transform.position - transform.position;
         dir.Normalize();
 
-        // ÀÌµ¿
+        // ì´ë™
         transform.Translate(dir * moveSpeed * Time.deltaTime);
     }
 }

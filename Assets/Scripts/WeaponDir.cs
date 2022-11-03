@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class WeaponDir : MonoBehaviour
 {
     GameObject NearestEnemy;
 
-    // ÇÃ·¹ÀÌ¾î°¡ Á÷Á¢ ¸¶¿ì½º·Î ¹«±â ¹æÇâÀ» ¼³Á¤ÇÒ ¼ö ÀÖµµ·Ï ÂüÁ¶¸¦ À§ÇÑ ÇÔ¼ö
+    // í”Œë ˆì´ì–´ê°€ ì§ì ‘ ë§ˆìš°ìŠ¤ë¡œ ë¬´ê¸° ë°©í–¥ì„ ì„¤ì •í•  ìˆ˜ ìˆë„ë¡ ì°¸ì¡°ë¥¼ ìœ„í•œ í•¨ìˆ˜
     public void LookCursor()
     {
         Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -18,7 +18,7 @@ public class WeaponDir : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, angle + 90f);
     }
 
-    // Á÷Á¢ »ç°İÀÌ ¾Æ´Ò ½Ã ¹«±â »çÁ¤°Å¸® ÀÌ³»ÀÌ¸é ÀÚµ¿ °ø°İ
+    // ì§ì ‘ ì‚¬ê²©ì´ ì•„ë‹ ì‹œ ë¬´ê¸° ì‚¬ì •ê±°ë¦¬ ì´ë‚´ì´ë©´ ìë™ ê³µê²©
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (Input.GetMouseButton(0) == false)
@@ -43,15 +43,15 @@ public class WeaponDir : MonoBehaviour
                 = new Vector2(transform.position.x - NearestEnemy.transform.position.x,
                 transform.position.y - NearestEnemy.transform.position.y);
 
-            // Atan2´Â ÅºÁ¨Æ® °ªÀ¸·Î ¶óµğ¾È °¢µµ¸¦ ±¸ÇÔ
-            // Rad2Deg´Â ¶óµğ¾È °ª¿¡ °öÇÏ¸é °¢µµ·Î º¯È¯
+            // Atan2ëŠ” íƒ„ì  íŠ¸ ê°’ìœ¼ë¡œ ë¼ë””ì•ˆ ê°ë„ë¥¼ êµ¬í•¨
+            // Rad2DegëŠ” ë¼ë””ì•ˆ ê°’ì— ê³±í•˜ë©´ ê°ë„ë¡œ ë³€í™˜
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.eulerAngles = new Vector3(0, 0, angle + 90f);
             GetComponentInChildren<WeaponFire>().Fire();
         }
     }
 
-    // ÃÑ¾ËÀÌ ¹«±â »çÁ¤°Å¸® ¹ÛÀÌ¸é ÃÑ¾Ë ÆÄ±«
+    // ì´ì•Œì´ ë¬´ê¸° ì‚¬ì •ê±°ë¦¬ ë°–ì´ë©´ ì´ì•Œ íŒŒê´´
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))

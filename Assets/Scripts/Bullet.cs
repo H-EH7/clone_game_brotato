@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector2.up * 10f * Time.deltaTime);
     }
 
-    // Enemy Tag¸¦ °¡Áø ¿ÀºêÁ§Æ®¿¡ ºÎµúÈ÷¸é µÑ ¸ğµÎ ÆÄ±«
+    // Enemy Tagë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ì— ë¶€ë”ªíˆë©´ ë‘˜ ëª¨ë‘ íŒŒê´´
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))

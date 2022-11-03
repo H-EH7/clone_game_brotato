@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour
         GenerateEnemy();
     }
 
-    // Enemy ¿ÀºêÁ§Æ®¸¦ ·£´ıÇÑ À§Ä¡¿¡¼­ »ı¼ºÇÏ´Â ÇÔ¼ö
+    // Enemy ì˜¤ë¸Œì íŠ¸ë¥¼ ëœë¤í•œ ìœ„ì¹˜ì—ì„œ ìƒì„±í•˜ëŠ” í•¨ìˆ˜
     void GenerateEnemy()
     {
         currentTime += Time.deltaTime;

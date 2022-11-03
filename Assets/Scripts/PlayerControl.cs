@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,33 +16,33 @@ public class PlayerControl : MonoBehaviour
         Move();
     }
 
-    // Player ÀÌµ¿ ÇÔ¼ö
+    // Player ì´ë™ í•¨ìˆ˜
     void Move()
     {
-        // Å° ÀÔ·Â°ª ¹Ş±â
+        // í‚¤ ì…ë ¥ê°’ ë°›ê¸°
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        // ¹æÇâ ¼³Á¤
+        // ë°©í–¥ ì„¤ì •
         Vector2 dir = new(h, v);
         dir.Normalize();
 
-        // ÀÌµ¿
+        // ì´ë™
         transform.Translate(dir * moveSpeed * Time.deltaTime);
     }
 
-    // Á÷Á¢ ¹«±â¸¦ ¹ß»çÇÏ´Â ÇÔ¼ö
+    // ì§ì ‘ ë¬´ê¸°ë¥¼ ë°œì‚¬í•˜ëŠ” í•¨ìˆ˜
     void TriggerFire()
     {
         if (Input.GetMouseButton(0))
         {
-            // ¹«±â°¡ ¸¶¿ì½º¸¦ ¹Ù¶óº½
+            // ë¬´ê¸°ê°€ ë§ˆìš°ìŠ¤ë¥¼ ë°”ë¼ë´„
             WeaponDir[] weaponDir = GetComponentsInChildren<WeaponDir>();
             for (int i = 0; i < weaponDir.Length; i++)
             {
                 weaponDir[i].LookCursor();
             }
-            // ÃÑ¾ËÀÌ ¹ß»çµÊ
+            // ì´ì•Œì´ ë°œì‚¬ë¨
             WeaponFire[] weaponFire = GetComponentsInChildren<WeaponFire>();
             for (int i = 0; i < weaponFire.Length; i++)
             {

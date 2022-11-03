@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public class WeaponFire : MonoBehaviour
     [SerializeField]
     GameObject Bullet;
 
-    // ¹«±â °ø°Ý¼Óµµ
+    // ë¬´ê¸° ê³µê²©ì†ë„
     const float fireSpeed = 1f;
 
     float currentTime = fireSpeed;
@@ -17,7 +17,7 @@ public class WeaponFire : MonoBehaviour
         currentTime = Mathf.Clamp(currentTime+Time.deltaTime, 0f, 1f);
     }
 
-    // bullet ¹ß»ç ÇÔ¼ö
+    // bullet ë°œì‚¬ í•¨ìˆ˜
     public void Fire()
     {
         if (currentTime>= fireSpeed)
