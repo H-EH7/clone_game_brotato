@@ -14,7 +14,9 @@ public class EnemyManager : MonoBehaviour
         GenerateEnemy();
     }
 
-    // Enemy 오브젝트를 랜덤한 위치에서 생성하는 함수
+    /// <summary>
+    /// Enemy 오브젝트를 랜덤한 위치에서 생성하는 함수
+    /// </summary>
     void GenerateEnemy()
     {
         currentTime += Time.deltaTime;

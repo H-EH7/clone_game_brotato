@@ -4,7 +4,9 @@ public class WeaponDir : MonoBehaviour
 {
     GameObject NearestEnemy;
 
-    // 플레이어가 직접 마우스로 무기 방향을 설정할 수 있도록 참조를 위한 함수
+    /// <summary>
+    /// 플레이어가 직접 마우스로 무기 방향을 설정할 수 있도록 참조를 위한 함수
+    /// </summary>
     public void LookCursor()
     {
         Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -18,6 +20,7 @@ public class WeaponDir : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, angle + 90f);
     }
 
+    
     // 직접 사격이 아닐 시 무기 사정거리 이내이면 자동 공격
     private void OnTriggerStay2D(Collider2D collision)
     {

@@ -19,7 +19,9 @@ public class EnemyControl : MonoBehaviour
         Move();
     }
 
-    // Enemy 이동 함수
+    /// <summary>
+    /// Enemy 이동 함수
+    /// </summary>
     void Move()
     {
         // 이동 방향 설정

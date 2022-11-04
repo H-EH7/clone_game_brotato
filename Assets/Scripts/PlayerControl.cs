@@ -16,7 +16,9 @@ public class PlayerControl : MonoBehaviour
         Move();
     }
 
-    // Player 이동 함수
+    /// <summary>
+    /// Player 이동 함수
+    /// </summary>
     void Move()
     {
         // 키 입력값 받기
@@ -31,7 +33,9 @@ public class PlayerControl : MonoBehaviour
         transform.Translate(dir * moveSpeed * Time.deltaTime);
     }
 
-    // 직접 무기를 발사하는 함수
+    /// <summary>
+    /// 직접 무기를 발사하는 함수
+    /// </summary>
     void TriggerFire()
     {
         if (Input.GetMouseButton(0))

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponFire : MonoBehaviour
@@ -8,24 +7,34 @@ public class WeaponFire : MonoBehaviour
     GameObject Bullet;
 
     // 무기 공격속도
-    const float fireSpeed = 1f;
+    const float fireRate = 1f;
 
-    float currentTime = fireSpeed;
+    bool isFireReady = true;
 
-    private void Update()
-    {
-        currentTime = Mathf.Clamp(currentTime+Time.deltaTime, 0f, 1f);
-    }
-
-    // bullet 발사 함수
+    /// <summary>
+    /// bullet 발사 함수
+    /// </summary>
     public void Fire()
     {
-        if (currentTime>= fireSpeed)
+        if (isFireReady)
         {
-            currentTime = 0f;
-            Instantiate(Bullet, transform.position, transform.rotation);
-            return;
+            isFireReady = false;
+            StartCoroutine(FireByRate());
         }
-        return;
+        else
+        {
+            Debug.Log("아직 발사할 수 없습니다.");
+        }
+    }
+
+    /// <summary>
+    /// 발사 가능 시간을 지연해주는 코루틴 함수
+    /// </summary>
+    /// <returns>WaitForSeconds</returns>
+    IEnumerator FireByRate()
+    {
+        Instantiate(Bullet, transform.position, transform.rotation);
+        yield return new WaitForSeconds(fireRate);
+        isFireReady = true;
     }
 }
