@@ -4,8 +4,23 @@ public class WeaponDir : MonoBehaviour
 {
     GameObject NearestEnemy;
 
+    Quaternion InitialDirection;
+
+    private void Start()
+    {
+        InitialDirection = transform.rotation;
+    }
+
+    private void Update()
+    {
+        if (NearestEnemy == null && Input.GetMouseButton(0) == false)
+        {
+            DirectionReset();
+        }
+    }
+
     /// <summary>
-    /// 플레이어가 직접 마우스로 무기 방향을 설정할 수 있도록 참조를 위한 함수
+    /// 플레이어가 직접 마우스로 무기 방향을 설정하는 함수 (참조용)
     /// </summary>
     public void LookCursor()
     {
@@ -18,6 +33,14 @@ public class WeaponDir : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         transform.eulerAngles = new Vector3(0, 0, angle + 90f);
+    }
+
+    /// <summary>
+    /// 무기 방향 원위치 함수 (Update)
+    /// </summary>
+    void DirectionReset()
+    {
+        transform.rotation = InitialDirection;
     }
 
     
@@ -46,11 +69,10 @@ public class WeaponDir : MonoBehaviour
                 = new Vector2(transform.position.x - NearestEnemy.transform.position.x,
                 transform.position.y - NearestEnemy.transform.position.y);
 
-            // Atan2는 탄젠트 값으로 라디안 각도를 구함
-            // Rad2Deg는 라디안 값에 곱하면 각도로 변환
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.eulerAngles = new Vector3(0, 0, angle + 90f);
-            GetComponentInChildren<WeaponFire>().Fire();
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().AutoFire();
         }
     }
 
