@@ -14,11 +14,14 @@ public class Enemy : MonoBehaviour
     public float containerDropRate = 0.01f;
     #endregion
 
-    public float currentHP;
 
     GameObject Target;
 
+    public GameObject dropItem;
+
     bool isAttackReady = true;
+
+    public float currentHP;
 
     private void Start()
     {
@@ -38,9 +41,9 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (isAttackReady && collision.gameObject.CompareTag("Player"))
+        if (isAttackReady && collision.gameObject.CompareTag("PlayerColider"))
         {
-            StartCoroutine(Attack(collision));
+            StartCoroutine(Attack(collision.gameObject.GetComponentInParent<Player>()));
         }
     }
 
@@ -49,12 +52,12 @@ public class Enemy : MonoBehaviour
     /// </summary>
     /// <param name="collision"></param>
     /// <returns></returns>
-    IEnumerator Attack(Collider2D collision)
+    IEnumerator Attack(Player player)
     {
         isAttackReady = false;
 
         // 플레이어 대미지 계산 함수 호출
-        collision.gameObject.GetComponent<Player>().Damaged(damage);
+        player.Damaged(damage);
 
         yield return new WaitForSeconds(1f);
         isAttackReady = true;
@@ -83,6 +86,8 @@ public class Enemy : MonoBehaviour
         if (currentHP <= 0)
         {
             Destroy(gameObject);
+            Instantiate(dropItem, transform.position, transform.rotation);
         }
     }
+
 }

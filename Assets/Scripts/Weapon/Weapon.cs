@@ -40,10 +40,6 @@ public class Weapon : MonoBehaviour
         {
             StartCoroutine(FireByRate(playerDmg, playerRangedDmg, playerCritChance, playerAttackSpeed, playerLifeSteal));
         }
-        else
-        {
-            Debug.Log("아직 발사할 수 없습니다.");
-        }
     }
 
     /// <summary>

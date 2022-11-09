@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -23,16 +24,18 @@ public class Player : MonoBehaviour
 
     public float currentHP;
 
+    bool isDamaged = false;
+
     private void Start()
     {
         currentHP = maxHP;
+        HPBar.instance.InitHPBar();
     }
 
     private void Update()
     {
         TriggerFire();
-        HPRegeneration();
-        HPtrim();
+        HPTrim();
     }
 
     void FixedUpdate()
@@ -62,7 +65,7 @@ public class Player : MonoBehaviour
     /// </summary>
     void TriggerFire()
     {
-        if (Input.GetMouseButton(0) == true)
+        if (Input.GetMouseButton(0) == true && Time.timeScale != 0f)
         {
             // 무기가 마우스를 바라봄
             WeaponDir[] weaponDir = GetComponentsInChildren<WeaponDir>();
@@ -91,23 +94,24 @@ public class Player : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 현재 체력 제한 함수 (Update)
-    /// </summary>
-    void HPtrim()
+    void HPTrim()
     {
-        Mathf.Clamp(currentHP, 0f, maxHP);
+        currentHP = Mathf.Clamp(currentHP, 0f, maxHP);
     }
 
     /// <summary>
     /// 체력 재생 함수 (Update)
     /// </summary>
-    void HPRegeneration()
+    IEnumerator HPRegeneration()
     {
-        // 체력이 닳아 있을 경우
-        if (currentHP < maxHP)
+        while (isDamaged)
         {
+            yield return new WaitForSeconds(1f);
             currentHP += hPRegen * 0.01f;
+            if (currentHP >= maxHP)
+            {
+                isDamaged = false;
+            }
         }
     }
 
@@ -129,6 +133,11 @@ public class Player : MonoBehaviour
             // 로그 함수로 점차 효과 떨어지도록 바꾸기 ========================================================
             // 방어력 적용 후 대미지 계산
             currentHP -= enemyDamage * (1 - armor * 0.04f);
+            if (isDamaged == false)
+            {
+                isDamaged = true;
+                StartCoroutine(HPRegeneration());
+            }
         }
 
         // 죽음

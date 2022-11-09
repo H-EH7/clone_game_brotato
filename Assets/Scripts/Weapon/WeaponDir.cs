@@ -47,7 +47,7 @@ public class WeaponDir : MonoBehaviour
     // 직접 사격이 아닐 시 무기 사정거리 이내이면 자동 공격
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetMouseButton(0) == false)
+        if (Input.GetMouseButton(0) == false && collision.CompareTag("Enemy"))
         {
 
             if (NearestEnemy == null)
@@ -72,7 +72,7 @@ public class WeaponDir : MonoBehaviour
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.eulerAngles = new Vector3(0, 0, angle + 90f);
 
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().AutoFire();
+            GameObject.Find("Player").GetComponent<Player>().AutoFire();
         }
     }
 

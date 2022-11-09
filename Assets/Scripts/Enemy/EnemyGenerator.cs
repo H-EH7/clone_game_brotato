@@ -8,19 +8,14 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField]
     float enemyGenTime = 5f;
 
-    bool isEnemyReady = true;
-
     public float mapMaxX = 21f;
     public float mapMinX = -21f;
     public float mapMaxY = 15f;
     public float mapMinY = -15f;
 
-    void Update()
+    void Start()
     {
-        if (GameObject.Find("Player"))
-        {
-            StartCoroutine(GenerateEnemy());
-        }
+        StartCoroutine(GenerateEnemy());
     }
 
     /// <summary>
@@ -28,13 +23,14 @@ public class EnemyGenerator : MonoBehaviour
     /// </summary>
     IEnumerator GenerateEnemy()
     {
-        if (isEnemyReady)
+        if (GameObject.Find("Player"))
         {
-            isEnemyReady = false;
-            Vector2 genPosition = new(Random.Range(mapMinX, mapMaxX), Random.Range(mapMinY, mapMaxY));
-            Instantiate(Enemy, genPosition, transform.rotation);
-            yield return new WaitForSeconds(enemyGenTime);
-            isEnemyReady = true;
+            while (true)
+            {
+                Vector2 genPosition = new(Random.Range(mapMinX, mapMaxX), Random.Range(mapMinY, mapMaxY));
+                Instantiate(Enemy, genPosition, transform.rotation);
+                yield return new WaitForSeconds(enemyGenTime);
+            }
         }
     }
 }
