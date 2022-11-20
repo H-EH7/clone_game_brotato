@@ -13,7 +13,7 @@ public class EnemyGenerator : MonoBehaviour
     public float mapMaxY = 15f;
     public float mapMinY = -15f;
 
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(GenerateEnemy());
     }

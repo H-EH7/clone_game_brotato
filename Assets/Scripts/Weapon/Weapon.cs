@@ -6,6 +6,8 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     GameObject Bullet;
 
+    public Sprite weaponSprite;
+
     #region === 무기 기본 스탯 ===
     public float damage = 1f;
     public float attackSpeed = 1f; // 1초에 x번 공격
@@ -27,13 +29,14 @@ public class Weapon : MonoBehaviour
         GetComponentInParent<CircleCollider2D>().radius = range + GameObject.Find("Player").GetComponent<Player>().range * 0.01f;
     }
 
-
     /// <summary>
     /// bullet 발사 함수 (참조용)
     /// </summary>
     /// <param name="playerDmg"></param>
     /// <param name="playerRangedDmg"></param>
     /// <param name="playerCritChance"></param>
+    /// <param name="playerAttackSpeed"></param>
+    /// <param name="playerLifeSteal"></param>
     public void Fire(float playerDmg, float playerRangedDmg, float playerCritChance, float playerAttackSpeed, float playerLifeSteal)
     {
         if (isFireReady)
@@ -54,6 +57,9 @@ public class Weapon : MonoBehaviour
         isFireReady = false;
         GameObject bullet = Instantiate(Bullet, transform.position, transform.rotation);
 
+        // 총알이 움직일 총 거리 넘겨줌
+        bullet.GetComponent<Bullet>().SetBulletRange(GetComponentInParent<CircleCollider2D>().radius);
+
         // 발사된 총알 대미지 계산
         float bulletDamage = (damage + playerRangedDmg * damageScale * 0.01f) * (1f + playerDmg * 0.01f);
 
@@ -65,11 +71,9 @@ public class Weapon : MonoBehaviour
         }
 
         // 총알의 체력 흡수 확률
-        float bulletLifeSteal = lifeSteal + playerLifeSteal;
-
+        bullet.GetComponent<Bullet>().bulletLifeSteal = lifeSteal + playerLifeSteal;
         bullet.GetComponent<Bullet>().bulletDamage = bulletDamage;
         bullet.GetComponent<Bullet>().bulletPierce = pierce;
-        bullet.GetComponent<Bullet>().bulletLifeSteal = bulletLifeSteal;
 
         float fireRate = 1 / (attackSpeed * (1 + playerAttackSpeed * 0.01f));
         yield return new WaitForSeconds(fireRate);

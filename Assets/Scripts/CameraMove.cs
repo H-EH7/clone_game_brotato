@@ -15,7 +15,10 @@ public class CameraMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (player != null)
+        {
+            Move();
+        }
     }
 
     void Move()

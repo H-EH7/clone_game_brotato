@@ -85,13 +85,9 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 자동 공격을 위한 함수 (참조용)
     /// </summary>
-    public void AutoFire()
+    public void AutoFire(Weapon weapon)
     {
-        Weapon[] weaponFire = GetComponentsInChildren<Weapon>();
-        for (int i = 0; i < weaponFire.Length; i++)
-        {
-            weaponFire[i].Fire(damage, rangedDamage, critChance, attackSpeed, lifeSteal);
-        }
+        weapon.Fire(damage, rangedDamage, critChance, attackSpeed, lifeSteal);
     }
 
     void HPTrim()

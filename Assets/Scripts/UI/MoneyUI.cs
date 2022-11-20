@@ -22,6 +22,6 @@ public class MoneyUI : MonoBehaviour
     /// </summary>
     public void UpdateMoneyUI()
     {
-        GetComponentInChildren<Text>().text = "Money : " + GameManager.instance.money;
+        GetComponentInChildren<Text>().text = $"Money : {GameManager.instance.money}";
     }
 }

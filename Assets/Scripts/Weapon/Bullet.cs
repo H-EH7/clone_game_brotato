@@ -9,9 +9,21 @@ public class Bullet : MonoBehaviour
     public float bulletLifeSteal = 0f;
     public int bulletPierce = 0;
 
+    float movedDistance = 0;
+    float bulletRange = 0;
+
+    private void Update()
+    {
+        if (movedDistance >= bulletRange)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void FixedUpdate()
     {
         transform.Translate(Vector2.up * bulletSpeed * Time.deltaTime);
+        movedDistance += bulletSpeed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,5 +47,10 @@ public class Bullet : MonoBehaviour
 
             collision.gameObject.GetComponent<Enemy>().Damaged(bulletDamage);
         }
+    }
+
+    public void SetBulletRange(float range)
+    {
+        bulletRange = range;
     }
 }
